@@ -1,0 +1,19 @@
+function main() returns Int:
+    val Int n;
+    n = getInt();
+    if(n ==10):
+        printInt(1);
+    end
+    if(n > 3 || 5 <= 1):
+        printInt(2);
+    end
+    if((n > 3) && (5 > 1)) printInt(3);
+    else
+        printInt(4);
+    if(n > 5):
+        printInt(5);
+    end
+    else
+        printInt(6);
+    return 0;
+end

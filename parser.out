@@ -1,0 +1,4663 @@
+Created by PLY (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> prog
+Rule 1     prog -> func
+Rule 2     prog -> func prog
+Rule 3     func -> FUNCTION iden LPARANT flist RPARANT RETURNS type COLON body END
+Rule 4     func -> FUNCTION iden LPARANT error RPARANT RETURNS type COLON body END
+Rule 5     body -> stmt
+Rule 6     body -> stmt body
+Rule 7     stmt -> expr SEMICOLON
+Rule 8     stmt -> defvar SEMICOLON
+Rule 9     stmt -> IF LPARANT expr RPARANT stmt else_choice
+Rule 10    stmt -> IF LPARANT error RPARANT stmt else_choice
+Rule 11    else_choice -> empty
+Rule 12    else_choice -> ELSE stmt
+Rule 13    stmt -> WHILE LPARANT expr RPARANT DO stmt
+Rule 14    stmt -> WHILE LPARANT error RPARANT DO stmt
+Rule 15    stmt -> WHILE LPARANT expr RPARANT error stmt
+Rule 16    stmt -> FOREACH LPARANT iden OF expr RPARANT stmt
+Rule 17    stmt -> RETURN expr SEMICOLON
+Rule 18    stmt -> COLON body END
+Rule 19    defvar -> VAL type iden
+Rule 20    expr -> iden LPARANT clist RPARANT
+Rule 21    expr -> iden LPARANT error RPARANT
+Rule 22    expr -> expr LBRACKET expr RBRACKET
+Rule 23    expr -> expr LBRACKET error RBRACKET
+Rule 24    expr -> expr QUEST_MARK expr COLON expr
+Rule 25    expr -> expr QUEST_MARK expr error expr
+Rule 26    expr -> expr EQUAL expr
+Rule 27    expr -> expr PLUS expr
+Rule 28    expr -> expr MINUS expr
+Rule 29    expr -> expr MULTIPLY expr
+Rule 30    expr -> expr DIVIDE expr
+Rule 31    expr -> expr PERCENT expr
+Rule 32    expr -> expr SMALL expr
+Rule 33    expr -> expr BIG expr
+Rule 34    expr -> expr EQUAL_EQUAL expr
+Rule 35    expr -> expr EXCL_EQUAL expr
+Rule 36    expr -> expr SMALL_EQUAL expr
+Rule 37    expr -> expr BIG_EQUAL expr
+Rule 38    expr -> expr PIPE_PIPE expr
+Rule 39    expr -> expr AMP_AMP expr
+Rule 40    expr -> EXCL_MARK expr
+Rule 41    expr -> MINUS expr
+Rule 42    expr -> PLUS expr
+Rule 43    expr -> LPARANT expr RPARANT
+Rule 44    expr -> LPARANT error RPARANT
+Rule 45    expr -> iden
+Rule 46    expr -> num
+Rule 47    flist -> empty
+Rule 48    flist -> type iden
+Rule 49    flist -> type iden COMMA flist
+Rule 50    clist -> empty
+Rule 51    clist -> expr
+Rule 52    clist -> expr COMMA clist
+Rule 53    type -> INT
+Rule 54    type -> ARRAY
+Rule 55    type -> NIL
+Rule 56    num -> NUMBER
+Rule 57    iden -> ID
+Rule 58    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AMP_AMP              : 39
+ARRAY                : 54
+BIG                  : 33
+BIG_EQUAL            : 37
+COLON                : 3 4 18 24
+COMMA                : 49 52
+DIVIDE               : 30
+DO                   : 13 14
+ELSE                 : 12
+END                  : 3 4 18
+EQUAL                : 26
+EQUAL_EQUAL          : 34
+EXCL_EQUAL           : 35
+EXCL_MARK            : 40
+FOREACH              : 16
+FUNCTION             : 3 4
+ID                   : 57
+IF                   : 9 10
+INT                  : 53
+LBRACKET             : 22 23
+LPARANT              : 3 4 9 10 13 14 15 16 20 21 43 44
+MINUS                : 28 41
+MULTIPLY             : 29
+NIL                  : 55
+NUMBER               : 56
+OF                   : 16
+PERCENT              : 31
+PIPE_PIPE            : 38
+PLUS                 : 27 42
+QUEST_MARK           : 24 25
+RBRACKET             : 22 23
+RETURN               : 17
+RETURNS              : 3 4
+RPARANT              : 3 4 9 10 13 14 15 16 20 21 43 44
+SEMICOLON            : 7 8 17
+SMALL                : 32
+SMALL_EQUAL          : 36
+VAL                  : 19
+WHILE                : 13 14 15
+error                : 4 10 14 15 21 23 25 44
+
+Nonterminals, with rules where they appear
+
+body                 : 3 4 6 18
+clist                : 20 52
+defvar               : 8
+else_choice          : 9 10
+empty                : 11 47 50
+expr                 : 7 9 13 15 16 17 22 22 23 24 24 24 25 25 25 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 33 34 34 35 35 36 36 37 37 38 38 39 39 40 41 42 43 51 52
+flist                : 3 49
+func                 : 1 2
+iden                 : 3 4 16 19 20 21 45 48 49
+num                  : 46
+prog                 : 2 0
+stmt                 : 5 6 9 10 12 13 14 15 16
+type                 : 3 4 19 48 49
+
+
+state 0
+
+    (0) S' -> . prog
+    (1) prog -> . func
+    (2) prog -> . func prog
+    (3) func -> . FUNCTION iden LPARANT flist RPARANT RETURNS type COLON body END
+    (4) func -> . FUNCTION iden LPARANT error RPARANT RETURNS type COLON body END
+
+    FUNCTION        shift and go to state 3
+
+    prog                           shift and go to state 1
+    func                           shift and go to state 2
+
+state 1
+
+    (0) S' -> prog .
+
+
+
+state 2
+
+    (1) prog -> func .
+    (2) prog -> func . prog
+    (1) prog -> . func
+    (2) prog -> . func prog
+    (3) func -> . FUNCTION iden LPARANT flist RPARANT RETURNS type COLON body END
+    (4) func -> . FUNCTION iden LPARANT error RPARANT RETURNS type COLON body END
+
+    $end            reduce using rule 1 (prog -> func .)
+    FUNCTION        shift and go to state 3
+
+    func                           shift and go to state 2
+    prog                           shift and go to state 4
+
+state 3
+
+    (3) func -> FUNCTION . iden LPARANT flist RPARANT RETURNS type COLON body END
+    (4) func -> FUNCTION . iden LPARANT error RPARANT RETURNS type COLON body END
+    (57) iden -> . ID
+
+    ID              shift and go to state 6
+
+    iden                           shift and go to state 5
+
+state 4
+
+    (2) prog -> func prog .
+
+    $end            reduce using rule 2 (prog -> func prog .)
+
+
+state 5
+
+    (3) func -> FUNCTION iden . LPARANT flist RPARANT RETURNS type COLON body END
+    (4) func -> FUNCTION iden . LPARANT error RPARANT RETURNS type COLON body END
+
+    LPARANT         shift and go to state 7
+
+
+state 6
+
+    (57) iden -> ID .
+
+    LPARANT         reduce using rule 57 (iden -> ID .)
+    COMMA           reduce using rule 57 (iden -> ID .)
+    RPARANT         reduce using rule 57 (iden -> ID .)
+    SEMICOLON       reduce using rule 57 (iden -> ID .)
+    LBRACKET        reduce using rule 57 (iden -> ID .)
+    QUEST_MARK      reduce using rule 57 (iden -> ID .)
+    EQUAL           reduce using rule 57 (iden -> ID .)
+    PLUS            reduce using rule 57 (iden -> ID .)
+    MINUS           reduce using rule 57 (iden -> ID .)
+    MULTIPLY        reduce using rule 57 (iden -> ID .)
+    DIVIDE          reduce using rule 57 (iden -> ID .)
+    PERCENT         reduce using rule 57 (iden -> ID .)
+    SMALL           reduce using rule 57 (iden -> ID .)
+    BIG             reduce using rule 57 (iden -> ID .)
+    EQUAL_EQUAL     reduce using rule 57 (iden -> ID .)
+    EXCL_EQUAL      reduce using rule 57 (iden -> ID .)
+    SMALL_EQUAL     reduce using rule 57 (iden -> ID .)
+    BIG_EQUAL       reduce using rule 57 (iden -> ID .)
+    PIPE_PIPE       reduce using rule 57 (iden -> ID .)
+    AMP_AMP         reduce using rule 57 (iden -> ID .)
+    RBRACKET        reduce using rule 57 (iden -> ID .)
+    COLON           reduce using rule 57 (iden -> ID .)
+    error           reduce using rule 57 (iden -> ID .)
+    OF              reduce using rule 57 (iden -> ID .)
+
+
+state 7
+
+    (3) func -> FUNCTION iden LPARANT . flist RPARANT RETURNS type COLON body END
+    (4) func -> FUNCTION iden LPARANT . error RPARANT RETURNS type COLON body END
+    (47) flist -> . empty
+    (48) flist -> . type iden
+    (49) flist -> . type iden COMMA flist
+    (58) empty -> .
+    (53) type -> . INT
+    (54) type -> . ARRAY
+    (55) type -> . NIL
+
+    error           shift and go to state 10
+    RPARANT         reduce using rule 58 (empty -> .)
+    INT             shift and go to state 12
+    ARRAY           shift and go to state 13
+    NIL             shift and go to state 14
+
+    flist                          shift and go to state 8
+    type                           shift and go to state 9
+    empty                          shift and go to state 11
+
+state 8
+
+    (3) func -> FUNCTION iden LPARANT flist . RPARANT RETURNS type COLON body END
+
+    RPARANT         shift and go to state 15
+
+
+state 9
+
+    (48) flist -> type . iden
+    (49) flist -> type . iden COMMA flist
+    (57) iden -> . ID
+
+    ID              shift and go to state 6
+
+    iden                           shift and go to state 16
+
+state 10
+
+    (4) func -> FUNCTION iden LPARANT error . RPARANT RETURNS type COLON body END
+
+    RPARANT         shift and go to state 17
+
+
+state 11
+
+    (47) flist -> empty .
+
+    RPARANT         reduce using rule 47 (flist -> empty .)
+
+
+state 12
+
+    (53) type -> INT .
+
+    ID              reduce using rule 53 (type -> INT .)
+    COLON           reduce using rule 53 (type -> INT .)
+
+
+state 13
+
+    (54) type -> ARRAY .
+
+    ID              reduce using rule 54 (type -> ARRAY .)
+    COLON           reduce using rule 54 (type -> ARRAY .)
+
+
+state 14
+
+    (55) type -> NIL .
+
+    ID              reduce using rule 55 (type -> NIL .)
+    COLON           reduce using rule 55 (type -> NIL .)
+
+
+state 15
+
+    (3) func -> FUNCTION iden LPARANT flist RPARANT . RETURNS type COLON body END
+
+    RETURNS         shift and go to state 18
+
+
+state 16
+
+    (48) flist -> type iden .
+    (49) flist -> type iden . COMMA flist
+
+    RPARANT         reduce using rule 48 (flist -> type iden .)
+    COMMA           shift and go to state 19
+
+
+state 17
+
+    (4) func -> FUNCTION iden LPARANT error RPARANT . RETURNS type COLON body END
+
+    RETURNS         shift and go to state 20
+
+
+state 18
+
+    (3) func -> FUNCTION iden LPARANT flist RPARANT RETURNS . type COLON body END
+    (53) type -> . INT
+    (54) type -> . ARRAY
+    (55) type -> . NIL
+
+    INT             shift and go to state 12
+    ARRAY           shift and go to state 13
+    NIL             shift and go to state 14
+
+    type                           shift and go to state 21
+
+state 19
+
+    (49) flist -> type iden COMMA . flist
+    (47) flist -> . empty
+    (48) flist -> . type iden
+    (49) flist -> . type iden COMMA flist
+    (58) empty -> .
+    (53) type -> . INT
+    (54) type -> . ARRAY
+    (55) type -> . NIL
+
+    RPARANT         reduce using rule 58 (empty -> .)
+    INT             shift and go to state 12
+    ARRAY           shift and go to state 13
+    NIL             shift and go to state 14
+
+    type                           shift and go to state 9
+    flist                          shift and go to state 22
+    empty                          shift and go to state 11
+
+state 20
+
+    (4) func -> FUNCTION iden LPARANT error RPARANT RETURNS . type COLON body END
+    (53) type -> . INT
+    (54) type -> . ARRAY
+    (55) type -> . NIL
+
+    INT             shift and go to state 12
+    ARRAY           shift and go to state 13
+    NIL             shift and go to state 14
+
+    type                           shift and go to state 23
+
+state 21
+
+    (3) func -> FUNCTION iden LPARANT flist RPARANT RETURNS type . COLON body END
+
+    COLON           shift and go to state 24
+
+
+state 22
+
+    (49) flist -> type iden COMMA flist .
+
+    RPARANT         reduce using rule 49 (flist -> type iden COMMA flist .)
+
+
+state 23
+
+    (4) func -> FUNCTION iden LPARANT error RPARANT RETURNS type . COLON body END
+
+    COLON           shift and go to state 25
+
+
+state 24
+
+    (3) func -> FUNCTION iden LPARANT flist RPARANT RETURNS type COLON . body END
+    (5) body -> . stmt
+    (6) body -> . stmt body
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    iden                           shift and go to state 26
+    body                           shift and go to state 29
+    stmt                           shift and go to state 30
+    expr                           shift and go to state 31
+    defvar                         shift and go to state 32
+    num                            shift and go to state 40
+
+state 25
+
+    (4) func -> FUNCTION iden LPARANT error RPARANT RETURNS type COLON . body END
+    (5) body -> . stmt
+    (6) body -> . stmt body
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    iden                           shift and go to state 26
+    body                           shift and go to state 43
+    stmt                           shift and go to state 30
+    expr                           shift and go to state 31
+    defvar                         shift and go to state 32
+    num                            shift and go to state 40
+
+state 26
+
+    (20) expr -> iden . LPARANT clist RPARANT
+    (21) expr -> iden . LPARANT error RPARANT
+    (45) expr -> iden .
+
+    LPARANT         shift and go to state 44
+    SEMICOLON       reduce using rule 45 (expr -> iden .)
+    LBRACKET        reduce using rule 45 (expr -> iden .)
+    QUEST_MARK      reduce using rule 45 (expr -> iden .)
+    EQUAL           reduce using rule 45 (expr -> iden .)
+    PLUS            reduce using rule 45 (expr -> iden .)
+    MINUS           reduce using rule 45 (expr -> iden .)
+    MULTIPLY        reduce using rule 45 (expr -> iden .)
+    DIVIDE          reduce using rule 45 (expr -> iden .)
+    PERCENT         reduce using rule 45 (expr -> iden .)
+    SMALL           reduce using rule 45 (expr -> iden .)
+    BIG             reduce using rule 45 (expr -> iden .)
+    EQUAL_EQUAL     reduce using rule 45 (expr -> iden .)
+    EXCL_EQUAL      reduce using rule 45 (expr -> iden .)
+    SMALL_EQUAL     reduce using rule 45 (expr -> iden .)
+    BIG_EQUAL       reduce using rule 45 (expr -> iden .)
+    PIPE_PIPE       reduce using rule 45 (expr -> iden .)
+    AMP_AMP         reduce using rule 45 (expr -> iden .)
+    RPARANT         reduce using rule 45 (expr -> iden .)
+    COMMA           reduce using rule 45 (expr -> iden .)
+    RBRACKET        reduce using rule 45 (expr -> iden .)
+    COLON           reduce using rule 45 (expr -> iden .)
+    error           reduce using rule 45 (expr -> iden .)
+
+
+state 27
+
+    (43) expr -> LPARANT . expr RPARANT
+    (44) expr -> LPARANT . error RPARANT
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    error           shift and go to state 46
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 45
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 28
+
+    (18) stmt -> COLON . body END
+    (5) body -> . stmt
+    (6) body -> . stmt body
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    body                           shift and go to state 47
+    stmt                           shift and go to state 30
+    expr                           shift and go to state 31
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 29
+
+    (3) func -> FUNCTION iden LPARANT flist RPARANT RETURNS type COLON body . END
+
+    END             shift and go to state 48
+
+
+state 30
+
+    (5) body -> stmt .
+    (6) body -> stmt . body
+    (5) body -> . stmt
+    (6) body -> . stmt body
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    END             reduce using rule 5 (body -> stmt .)
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    stmt                           shift and go to state 30
+    body                           shift and go to state 49
+    expr                           shift and go to state 31
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 31
+
+    (7) stmt -> expr . SEMICOLON
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       shift and go to state 50
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 32
+
+    (8) stmt -> defvar . SEMICOLON
+
+    SEMICOLON       shift and go to state 67
+
+
+state 33
+
+    (9) stmt -> IF . LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> IF . LPARANT error RPARANT stmt else_choice
+
+    LPARANT         shift and go to state 68
+
+
+state 34
+
+    (13) stmt -> WHILE . LPARANT expr RPARANT DO stmt
+    (14) stmt -> WHILE . LPARANT error RPARANT DO stmt
+    (15) stmt -> WHILE . LPARANT expr RPARANT error stmt
+
+    LPARANT         shift and go to state 69
+
+
+state 35
+
+    (16) stmt -> FOREACH . LPARANT iden OF expr RPARANT stmt
+
+    LPARANT         shift and go to state 70
+
+
+state 36
+
+    (17) stmt -> RETURN . expr SEMICOLON
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 71
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 37
+
+    (42) expr -> PLUS . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 72
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 38
+
+    (41) expr -> MINUS . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 73
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 39
+
+    (40) expr -> EXCL_MARK . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 74
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 40
+
+    (46) expr -> num .
+
+    SEMICOLON       reduce using rule 46 (expr -> num .)
+    LBRACKET        reduce using rule 46 (expr -> num .)
+    QUEST_MARK      reduce using rule 46 (expr -> num .)
+    EQUAL           reduce using rule 46 (expr -> num .)
+    PLUS            reduce using rule 46 (expr -> num .)
+    MINUS           reduce using rule 46 (expr -> num .)
+    MULTIPLY        reduce using rule 46 (expr -> num .)
+    DIVIDE          reduce using rule 46 (expr -> num .)
+    PERCENT         reduce using rule 46 (expr -> num .)
+    SMALL           reduce using rule 46 (expr -> num .)
+    BIG             reduce using rule 46 (expr -> num .)
+    EQUAL_EQUAL     reduce using rule 46 (expr -> num .)
+    EXCL_EQUAL      reduce using rule 46 (expr -> num .)
+    SMALL_EQUAL     reduce using rule 46 (expr -> num .)
+    BIG_EQUAL       reduce using rule 46 (expr -> num .)
+    PIPE_PIPE       reduce using rule 46 (expr -> num .)
+    AMP_AMP         reduce using rule 46 (expr -> num .)
+    RPARANT         reduce using rule 46 (expr -> num .)
+    COMMA           reduce using rule 46 (expr -> num .)
+    RBRACKET        reduce using rule 46 (expr -> num .)
+    COLON           reduce using rule 46 (expr -> num .)
+    error           reduce using rule 46 (expr -> num .)
+
+
+state 41
+
+    (19) defvar -> VAL . type iden
+    (53) type -> . INT
+    (54) type -> . ARRAY
+    (55) type -> . NIL
+
+    INT             shift and go to state 12
+    ARRAY           shift and go to state 13
+    NIL             shift and go to state 14
+
+    type                           shift and go to state 75
+
+state 42
+
+    (56) num -> NUMBER .
+
+    SEMICOLON       reduce using rule 56 (num -> NUMBER .)
+    LBRACKET        reduce using rule 56 (num -> NUMBER .)
+    QUEST_MARK      reduce using rule 56 (num -> NUMBER .)
+    EQUAL           reduce using rule 56 (num -> NUMBER .)
+    PLUS            reduce using rule 56 (num -> NUMBER .)
+    MINUS           reduce using rule 56 (num -> NUMBER .)
+    MULTIPLY        reduce using rule 56 (num -> NUMBER .)
+    DIVIDE          reduce using rule 56 (num -> NUMBER .)
+    PERCENT         reduce using rule 56 (num -> NUMBER .)
+    SMALL           reduce using rule 56 (num -> NUMBER .)
+    BIG             reduce using rule 56 (num -> NUMBER .)
+    EQUAL_EQUAL     reduce using rule 56 (num -> NUMBER .)
+    EXCL_EQUAL      reduce using rule 56 (num -> NUMBER .)
+    SMALL_EQUAL     reduce using rule 56 (num -> NUMBER .)
+    BIG_EQUAL       reduce using rule 56 (num -> NUMBER .)
+    PIPE_PIPE       reduce using rule 56 (num -> NUMBER .)
+    AMP_AMP         reduce using rule 56 (num -> NUMBER .)
+    RPARANT         reduce using rule 56 (num -> NUMBER .)
+    COMMA           reduce using rule 56 (num -> NUMBER .)
+    RBRACKET        reduce using rule 56 (num -> NUMBER .)
+    COLON           reduce using rule 56 (num -> NUMBER .)
+    error           reduce using rule 56 (num -> NUMBER .)
+
+
+state 43
+
+    (4) func -> FUNCTION iden LPARANT error RPARANT RETURNS type COLON body . END
+
+    END             shift and go to state 76
+
+
+state 44
+
+    (20) expr -> iden LPARANT . clist RPARANT
+    (21) expr -> iden LPARANT . error RPARANT
+    (50) clist -> . empty
+    (51) clist -> . expr
+    (52) clist -> . expr COMMA clist
+    (58) empty -> .
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    error           shift and go to state 78
+    RPARANT         reduce using rule 58 (empty -> .)
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    iden                           shift and go to state 26
+    clist                          shift and go to state 77
+    empty                          shift and go to state 79
+    expr                           shift and go to state 80
+    num                            shift and go to state 40
+
+state 45
+
+    (43) expr -> LPARANT expr . RPARANT
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    RPARANT         shift and go to state 81
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 46
+
+    (44) expr -> LPARANT error . RPARANT
+
+    RPARANT         shift and go to state 82
+
+
+state 47
+
+    (18) stmt -> COLON body . END
+
+    END             shift and go to state 83
+
+
+state 48
+
+    (3) func -> FUNCTION iden LPARANT flist RPARANT RETURNS type COLON body END .
+
+    FUNCTION        reduce using rule 3 (func -> FUNCTION iden LPARANT flist RPARANT RETURNS type COLON body END .)
+    $end            reduce using rule 3 (func -> FUNCTION iden LPARANT flist RPARANT RETURNS type COLON body END .)
+
+
+state 49
+
+    (6) body -> stmt body .
+
+    END             reduce using rule 6 (body -> stmt body .)
+
+
+state 50
+
+    (7) stmt -> expr SEMICOLON .
+
+    IF              reduce using rule 7 (stmt -> expr SEMICOLON .)
+    WHILE           reduce using rule 7 (stmt -> expr SEMICOLON .)
+    FOREACH         reduce using rule 7 (stmt -> expr SEMICOLON .)
+    RETURN          reduce using rule 7 (stmt -> expr SEMICOLON .)
+    COLON           reduce using rule 7 (stmt -> expr SEMICOLON .)
+    EXCL_MARK       reduce using rule 7 (stmt -> expr SEMICOLON .)
+    MINUS           reduce using rule 7 (stmt -> expr SEMICOLON .)
+    PLUS            reduce using rule 7 (stmt -> expr SEMICOLON .)
+    LPARANT         reduce using rule 7 (stmt -> expr SEMICOLON .)
+    VAL             reduce using rule 7 (stmt -> expr SEMICOLON .)
+    ID              reduce using rule 7 (stmt -> expr SEMICOLON .)
+    NUMBER          reduce using rule 7 (stmt -> expr SEMICOLON .)
+    END             reduce using rule 7 (stmt -> expr SEMICOLON .)
+    ELSE            reduce using rule 7 (stmt -> expr SEMICOLON .)
+
+
+state 51
+
+    (22) expr -> expr LBRACKET . expr RBRACKET
+    (23) expr -> expr LBRACKET . error RBRACKET
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    error           shift and go to state 85
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 84
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 52
+
+    (24) expr -> expr QUEST_MARK . expr COLON expr
+    (25) expr -> expr QUEST_MARK . expr error expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 86
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 53
+
+    (26) expr -> expr EQUAL . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 87
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 54
+
+    (27) expr -> expr PLUS . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 88
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 55
+
+    (28) expr -> expr MINUS . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 89
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 56
+
+    (29) expr -> expr MULTIPLY . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 90
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 57
+
+    (30) expr -> expr DIVIDE . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 91
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 58
+
+    (31) expr -> expr PERCENT . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 92
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 59
+
+    (32) expr -> expr SMALL . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 93
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 60
+
+    (33) expr -> expr BIG . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 94
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 61
+
+    (34) expr -> expr EQUAL_EQUAL . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 95
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 62
+
+    (35) expr -> expr EXCL_EQUAL . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 96
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 63
+
+    (36) expr -> expr SMALL_EQUAL . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 97
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 64
+
+    (37) expr -> expr BIG_EQUAL . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 98
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 65
+
+    (38) expr -> expr PIPE_PIPE . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 99
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 66
+
+    (39) expr -> expr AMP_AMP . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 100
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 67
+
+    (8) stmt -> defvar SEMICOLON .
+
+    IF              reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    WHILE           reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    FOREACH         reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    RETURN          reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    COLON           reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    EXCL_MARK       reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    MINUS           reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    PLUS            reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    LPARANT         reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    VAL             reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    ID              reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    NUMBER          reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    END             reduce using rule 8 (stmt -> defvar SEMICOLON .)
+    ELSE            reduce using rule 8 (stmt -> defvar SEMICOLON .)
+
+
+state 68
+
+    (9) stmt -> IF LPARANT . expr RPARANT stmt else_choice
+    (10) stmt -> IF LPARANT . error RPARANT stmt else_choice
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    error           shift and go to state 102
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 101
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 69
+
+    (13) stmt -> WHILE LPARANT . expr RPARANT DO stmt
+    (14) stmt -> WHILE LPARANT . error RPARANT DO stmt
+    (15) stmt -> WHILE LPARANT . expr RPARANT error stmt
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    error           shift and go to state 104
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 103
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 70
+
+    (16) stmt -> FOREACH LPARANT . iden OF expr RPARANT stmt
+    (57) iden -> . ID
+
+    ID              shift and go to state 6
+
+    iden                           shift and go to state 105
+
+state 71
+
+    (17) stmt -> RETURN expr . SEMICOLON
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       shift and go to state 106
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 72
+
+    (42) expr -> PLUS expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 42 (expr -> PLUS expr .)
+    QUEST_MARK      reduce using rule 42 (expr -> PLUS expr .)
+    EQUAL           reduce using rule 42 (expr -> PLUS expr .)
+    PLUS            reduce using rule 42 (expr -> PLUS expr .)
+    MINUS           reduce using rule 42 (expr -> PLUS expr .)
+    SMALL           reduce using rule 42 (expr -> PLUS expr .)
+    BIG             reduce using rule 42 (expr -> PLUS expr .)
+    EQUAL_EQUAL     reduce using rule 42 (expr -> PLUS expr .)
+    EXCL_EQUAL      reduce using rule 42 (expr -> PLUS expr .)
+    SMALL_EQUAL     reduce using rule 42 (expr -> PLUS expr .)
+    BIG_EQUAL       reduce using rule 42 (expr -> PLUS expr .)
+    PIPE_PIPE       reduce using rule 42 (expr -> PLUS expr .)
+    AMP_AMP         reduce using rule 42 (expr -> PLUS expr .)
+    RPARANT         reduce using rule 42 (expr -> PLUS expr .)
+    COMMA           reduce using rule 42 (expr -> PLUS expr .)
+    RBRACKET        reduce using rule 42 (expr -> PLUS expr .)
+    COLON           reduce using rule 42 (expr -> PLUS expr .)
+    error           reduce using rule 42 (expr -> PLUS expr .)
+    LBRACKET        shift and go to state 51
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 42 (expr -> PLUS expr .) ]
+  ! MULTIPLY        [ reduce using rule 42 (expr -> PLUS expr .) ]
+  ! DIVIDE          [ reduce using rule 42 (expr -> PLUS expr .) ]
+  ! PERCENT         [ reduce using rule 42 (expr -> PLUS expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! PLUS            [ shift and go to state 54 ]
+  ! MINUS           [ shift and go to state 55 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 73
+
+    (41) expr -> MINUS expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 41 (expr -> MINUS expr .)
+    QUEST_MARK      reduce using rule 41 (expr -> MINUS expr .)
+    EQUAL           reduce using rule 41 (expr -> MINUS expr .)
+    PLUS            reduce using rule 41 (expr -> MINUS expr .)
+    MINUS           reduce using rule 41 (expr -> MINUS expr .)
+    SMALL           reduce using rule 41 (expr -> MINUS expr .)
+    BIG             reduce using rule 41 (expr -> MINUS expr .)
+    EQUAL_EQUAL     reduce using rule 41 (expr -> MINUS expr .)
+    EXCL_EQUAL      reduce using rule 41 (expr -> MINUS expr .)
+    SMALL_EQUAL     reduce using rule 41 (expr -> MINUS expr .)
+    BIG_EQUAL       reduce using rule 41 (expr -> MINUS expr .)
+    PIPE_PIPE       reduce using rule 41 (expr -> MINUS expr .)
+    AMP_AMP         reduce using rule 41 (expr -> MINUS expr .)
+    RPARANT         reduce using rule 41 (expr -> MINUS expr .)
+    COMMA           reduce using rule 41 (expr -> MINUS expr .)
+    RBRACKET        reduce using rule 41 (expr -> MINUS expr .)
+    COLON           reduce using rule 41 (expr -> MINUS expr .)
+    error           reduce using rule 41 (expr -> MINUS expr .)
+    LBRACKET        shift and go to state 51
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 41 (expr -> MINUS expr .) ]
+  ! MULTIPLY        [ reduce using rule 41 (expr -> MINUS expr .) ]
+  ! DIVIDE          [ reduce using rule 41 (expr -> MINUS expr .) ]
+  ! PERCENT         [ reduce using rule 41 (expr -> MINUS expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! PLUS            [ shift and go to state 54 ]
+  ! MINUS           [ shift and go to state 55 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 74
+
+    (40) expr -> EXCL_MARK expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 40 (expr -> EXCL_MARK expr .)
+    SMALL           reduce using rule 40 (expr -> EXCL_MARK expr .)
+    BIG             reduce using rule 40 (expr -> EXCL_MARK expr .)
+    EQUAL_EQUAL     reduce using rule 40 (expr -> EXCL_MARK expr .)
+    EXCL_EQUAL      reduce using rule 40 (expr -> EXCL_MARK expr .)
+    SMALL_EQUAL     reduce using rule 40 (expr -> EXCL_MARK expr .)
+    BIG_EQUAL       reduce using rule 40 (expr -> EXCL_MARK expr .)
+    PIPE_PIPE       reduce using rule 40 (expr -> EXCL_MARK expr .)
+    AMP_AMP         reduce using rule 40 (expr -> EXCL_MARK expr .)
+    RPARANT         reduce using rule 40 (expr -> EXCL_MARK expr .)
+    COMMA           reduce using rule 40 (expr -> EXCL_MARK expr .)
+    RBRACKET        reduce using rule 40 (expr -> EXCL_MARK expr .)
+    COLON           reduce using rule 40 (expr -> EXCL_MARK expr .)
+    error           reduce using rule 40 (expr -> EXCL_MARK expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! QUEST_MARK      [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! EQUAL           [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! PLUS            [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! MINUS           [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! MULTIPLY        [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! DIVIDE          [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! PERCENT         [ reduce using rule 40 (expr -> EXCL_MARK expr .) ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 75
+
+    (19) defvar -> VAL type . iden
+    (57) iden -> . ID
+
+    ID              shift and go to state 6
+
+    iden                           shift and go to state 107
+
+state 76
+
+    (4) func -> FUNCTION iden LPARANT error RPARANT RETURNS type COLON body END .
+
+    FUNCTION        reduce using rule 4 (func -> FUNCTION iden LPARANT error RPARANT RETURNS type COLON body END .)
+    $end            reduce using rule 4 (func -> FUNCTION iden LPARANT error RPARANT RETURNS type COLON body END .)
+
+
+state 77
+
+    (20) expr -> iden LPARANT clist . RPARANT
+
+    RPARANT         shift and go to state 108
+
+
+state 78
+
+    (21) expr -> iden LPARANT error . RPARANT
+
+    RPARANT         shift and go to state 109
+
+
+state 79
+
+    (50) clist -> empty .
+
+    RPARANT         reduce using rule 50 (clist -> empty .)
+
+
+state 80
+
+    (51) clist -> expr .
+    (52) clist -> expr . COMMA clist
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    RPARANT         reduce using rule 51 (clist -> expr .)
+    COMMA           shift and go to state 110
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 81
+
+    (43) expr -> LPARANT expr RPARANT .
+
+    SEMICOLON       reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    LBRACKET        reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    QUEST_MARK      reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    EQUAL           reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    PLUS            reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    MINUS           reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    MULTIPLY        reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    DIVIDE          reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    PERCENT         reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    SMALL           reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    BIG             reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    EQUAL_EQUAL     reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    EXCL_EQUAL      reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    SMALL_EQUAL     reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    BIG_EQUAL       reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    PIPE_PIPE       reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    AMP_AMP         reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    RPARANT         reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    COMMA           reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    RBRACKET        reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    COLON           reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+    error           reduce using rule 43 (expr -> LPARANT expr RPARANT .)
+
+
+state 82
+
+    (44) expr -> LPARANT error RPARANT .
+
+    SEMICOLON       reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    LBRACKET        reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    QUEST_MARK      reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    EQUAL           reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    PLUS            reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    MINUS           reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    MULTIPLY        reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    DIVIDE          reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    PERCENT         reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    SMALL           reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    BIG             reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    EQUAL_EQUAL     reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    EXCL_EQUAL      reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    SMALL_EQUAL     reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    BIG_EQUAL       reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    PIPE_PIPE       reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    AMP_AMP         reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    RPARANT         reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    COMMA           reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    RBRACKET        reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    COLON           reduce using rule 44 (expr -> LPARANT error RPARANT .)
+    error           reduce using rule 44 (expr -> LPARANT error RPARANT .)
+
+
+state 83
+
+    (18) stmt -> COLON body END .
+
+    IF              reduce using rule 18 (stmt -> COLON body END .)
+    WHILE           reduce using rule 18 (stmt -> COLON body END .)
+    FOREACH         reduce using rule 18 (stmt -> COLON body END .)
+    RETURN          reduce using rule 18 (stmt -> COLON body END .)
+    COLON           reduce using rule 18 (stmt -> COLON body END .)
+    EXCL_MARK       reduce using rule 18 (stmt -> COLON body END .)
+    MINUS           reduce using rule 18 (stmt -> COLON body END .)
+    PLUS            reduce using rule 18 (stmt -> COLON body END .)
+    LPARANT         reduce using rule 18 (stmt -> COLON body END .)
+    VAL             reduce using rule 18 (stmt -> COLON body END .)
+    ID              reduce using rule 18 (stmt -> COLON body END .)
+    NUMBER          reduce using rule 18 (stmt -> COLON body END .)
+    END             reduce using rule 18 (stmt -> COLON body END .)
+    ELSE            reduce using rule 18 (stmt -> COLON body END .)
+
+
+state 84
+
+    (22) expr -> expr LBRACKET expr . RBRACKET
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    RBRACKET        shift and go to state 111
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 85
+
+    (23) expr -> expr LBRACKET error . RBRACKET
+
+    RBRACKET        shift and go to state 112
+
+
+state 86
+
+    (24) expr -> expr QUEST_MARK expr . COLON expr
+    (25) expr -> expr QUEST_MARK expr . error expr
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    COLON           shift and go to state 113
+    error           shift and go to state 114
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 87
+
+    (26) expr -> expr EQUAL expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 26 (expr -> expr EQUAL expr .)
+    QUEST_MARK      reduce using rule 26 (expr -> expr EQUAL expr .)
+    EQUAL           reduce using rule 26 (expr -> expr EQUAL expr .)
+    SMALL           reduce using rule 26 (expr -> expr EQUAL expr .)
+    BIG             reduce using rule 26 (expr -> expr EQUAL expr .)
+    EQUAL_EQUAL     reduce using rule 26 (expr -> expr EQUAL expr .)
+    EXCL_EQUAL      reduce using rule 26 (expr -> expr EQUAL expr .)
+    SMALL_EQUAL     reduce using rule 26 (expr -> expr EQUAL expr .)
+    BIG_EQUAL       reduce using rule 26 (expr -> expr EQUAL expr .)
+    PIPE_PIPE       reduce using rule 26 (expr -> expr EQUAL expr .)
+    AMP_AMP         reduce using rule 26 (expr -> expr EQUAL expr .)
+    RPARANT         reduce using rule 26 (expr -> expr EQUAL expr .)
+    COMMA           reduce using rule 26 (expr -> expr EQUAL expr .)
+    RBRACKET        reduce using rule 26 (expr -> expr EQUAL expr .)
+    COLON           reduce using rule 26 (expr -> expr EQUAL expr .)
+    error           reduce using rule 26 (expr -> expr EQUAL expr .)
+    LBRACKET        shift and go to state 51
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 26 (expr -> expr EQUAL expr .) ]
+  ! PLUS            [ reduce using rule 26 (expr -> expr EQUAL expr .) ]
+  ! MINUS           [ reduce using rule 26 (expr -> expr EQUAL expr .) ]
+  ! MULTIPLY        [ reduce using rule 26 (expr -> expr EQUAL expr .) ]
+  ! DIVIDE          [ reduce using rule 26 (expr -> expr EQUAL expr .) ]
+  ! PERCENT         [ reduce using rule 26 (expr -> expr EQUAL expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 88
+
+    (27) expr -> expr PLUS expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 27 (expr -> expr PLUS expr .)
+    QUEST_MARK      reduce using rule 27 (expr -> expr PLUS expr .)
+    EQUAL           reduce using rule 27 (expr -> expr PLUS expr .)
+    PLUS            reduce using rule 27 (expr -> expr PLUS expr .)
+    MINUS           reduce using rule 27 (expr -> expr PLUS expr .)
+    SMALL           reduce using rule 27 (expr -> expr PLUS expr .)
+    BIG             reduce using rule 27 (expr -> expr PLUS expr .)
+    EQUAL_EQUAL     reduce using rule 27 (expr -> expr PLUS expr .)
+    EXCL_EQUAL      reduce using rule 27 (expr -> expr PLUS expr .)
+    SMALL_EQUAL     reduce using rule 27 (expr -> expr PLUS expr .)
+    BIG_EQUAL       reduce using rule 27 (expr -> expr PLUS expr .)
+    PIPE_PIPE       reduce using rule 27 (expr -> expr PLUS expr .)
+    AMP_AMP         reduce using rule 27 (expr -> expr PLUS expr .)
+    RPARANT         reduce using rule 27 (expr -> expr PLUS expr .)
+    COMMA           reduce using rule 27 (expr -> expr PLUS expr .)
+    RBRACKET        reduce using rule 27 (expr -> expr PLUS expr .)
+    COLON           reduce using rule 27 (expr -> expr PLUS expr .)
+    error           reduce using rule 27 (expr -> expr PLUS expr .)
+    LBRACKET        shift and go to state 51
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 27 (expr -> expr PLUS expr .) ]
+  ! MULTIPLY        [ reduce using rule 27 (expr -> expr PLUS expr .) ]
+  ! DIVIDE          [ reduce using rule 27 (expr -> expr PLUS expr .) ]
+  ! PERCENT         [ reduce using rule 27 (expr -> expr PLUS expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! PLUS            [ shift and go to state 54 ]
+  ! MINUS           [ shift and go to state 55 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 89
+
+    (28) expr -> expr MINUS expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 28 (expr -> expr MINUS expr .)
+    QUEST_MARK      reduce using rule 28 (expr -> expr MINUS expr .)
+    EQUAL           reduce using rule 28 (expr -> expr MINUS expr .)
+    PLUS            reduce using rule 28 (expr -> expr MINUS expr .)
+    MINUS           reduce using rule 28 (expr -> expr MINUS expr .)
+    SMALL           reduce using rule 28 (expr -> expr MINUS expr .)
+    BIG             reduce using rule 28 (expr -> expr MINUS expr .)
+    EQUAL_EQUAL     reduce using rule 28 (expr -> expr MINUS expr .)
+    EXCL_EQUAL      reduce using rule 28 (expr -> expr MINUS expr .)
+    SMALL_EQUAL     reduce using rule 28 (expr -> expr MINUS expr .)
+    BIG_EQUAL       reduce using rule 28 (expr -> expr MINUS expr .)
+    PIPE_PIPE       reduce using rule 28 (expr -> expr MINUS expr .)
+    AMP_AMP         reduce using rule 28 (expr -> expr MINUS expr .)
+    RPARANT         reduce using rule 28 (expr -> expr MINUS expr .)
+    COMMA           reduce using rule 28 (expr -> expr MINUS expr .)
+    RBRACKET        reduce using rule 28 (expr -> expr MINUS expr .)
+    COLON           reduce using rule 28 (expr -> expr MINUS expr .)
+    error           reduce using rule 28 (expr -> expr MINUS expr .)
+    LBRACKET        shift and go to state 51
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 28 (expr -> expr MINUS expr .) ]
+  ! MULTIPLY        [ reduce using rule 28 (expr -> expr MINUS expr .) ]
+  ! DIVIDE          [ reduce using rule 28 (expr -> expr MINUS expr .) ]
+  ! PERCENT         [ reduce using rule 28 (expr -> expr MINUS expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! PLUS            [ shift and go to state 54 ]
+  ! MINUS           [ shift and go to state 55 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 90
+
+    (29) expr -> expr MULTIPLY expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    QUEST_MARK      reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    EQUAL           reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    PLUS            reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    MINUS           reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    MULTIPLY        reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    DIVIDE          reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    PERCENT         reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    SMALL           reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    BIG             reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    EQUAL_EQUAL     reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    EXCL_EQUAL      reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    SMALL_EQUAL     reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    BIG_EQUAL       reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    PIPE_PIPE       reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    AMP_AMP         reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    RPARANT         reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    COMMA           reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    RBRACKET        reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    COLON           reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    error           reduce using rule 29 (expr -> expr MULTIPLY expr .)
+    LBRACKET        shift and go to state 51
+
+  ! LBRACKET        [ reduce using rule 29 (expr -> expr MULTIPLY expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! PLUS            [ shift and go to state 54 ]
+  ! MINUS           [ shift and go to state 55 ]
+  ! MULTIPLY        [ shift and go to state 56 ]
+  ! DIVIDE          [ shift and go to state 57 ]
+  ! PERCENT         [ shift and go to state 58 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 91
+
+    (30) expr -> expr DIVIDE expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 30 (expr -> expr DIVIDE expr .)
+    QUEST_MARK      reduce using rule 30 (expr -> expr DIVIDE expr .)
+    EQUAL           reduce using rule 30 (expr -> expr DIVIDE expr .)
+    PLUS            reduce using rule 30 (expr -> expr DIVIDE expr .)
+    MINUS           reduce using rule 30 (expr -> expr DIVIDE expr .)
+    MULTIPLY        reduce using rule 30 (expr -> expr DIVIDE expr .)
+    DIVIDE          reduce using rule 30 (expr -> expr DIVIDE expr .)
+    PERCENT         reduce using rule 30 (expr -> expr DIVIDE expr .)
+    SMALL           reduce using rule 30 (expr -> expr DIVIDE expr .)
+    BIG             reduce using rule 30 (expr -> expr DIVIDE expr .)
+    EQUAL_EQUAL     reduce using rule 30 (expr -> expr DIVIDE expr .)
+    EXCL_EQUAL      reduce using rule 30 (expr -> expr DIVIDE expr .)
+    SMALL_EQUAL     reduce using rule 30 (expr -> expr DIVIDE expr .)
+    BIG_EQUAL       reduce using rule 30 (expr -> expr DIVIDE expr .)
+    PIPE_PIPE       reduce using rule 30 (expr -> expr DIVIDE expr .)
+    AMP_AMP         reduce using rule 30 (expr -> expr DIVIDE expr .)
+    RPARANT         reduce using rule 30 (expr -> expr DIVIDE expr .)
+    COMMA           reduce using rule 30 (expr -> expr DIVIDE expr .)
+    RBRACKET        reduce using rule 30 (expr -> expr DIVIDE expr .)
+    COLON           reduce using rule 30 (expr -> expr DIVIDE expr .)
+    error           reduce using rule 30 (expr -> expr DIVIDE expr .)
+    LBRACKET        shift and go to state 51
+
+  ! LBRACKET        [ reduce using rule 30 (expr -> expr DIVIDE expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! PLUS            [ shift and go to state 54 ]
+  ! MINUS           [ shift and go to state 55 ]
+  ! MULTIPLY        [ shift and go to state 56 ]
+  ! DIVIDE          [ shift and go to state 57 ]
+  ! PERCENT         [ shift and go to state 58 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 92
+
+    (31) expr -> expr PERCENT expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 31 (expr -> expr PERCENT expr .)
+    QUEST_MARK      reduce using rule 31 (expr -> expr PERCENT expr .)
+    EQUAL           reduce using rule 31 (expr -> expr PERCENT expr .)
+    PLUS            reduce using rule 31 (expr -> expr PERCENT expr .)
+    MINUS           reduce using rule 31 (expr -> expr PERCENT expr .)
+    MULTIPLY        reduce using rule 31 (expr -> expr PERCENT expr .)
+    DIVIDE          reduce using rule 31 (expr -> expr PERCENT expr .)
+    PERCENT         reduce using rule 31 (expr -> expr PERCENT expr .)
+    SMALL           reduce using rule 31 (expr -> expr PERCENT expr .)
+    BIG             reduce using rule 31 (expr -> expr PERCENT expr .)
+    EQUAL_EQUAL     reduce using rule 31 (expr -> expr PERCENT expr .)
+    EXCL_EQUAL      reduce using rule 31 (expr -> expr PERCENT expr .)
+    SMALL_EQUAL     reduce using rule 31 (expr -> expr PERCENT expr .)
+    BIG_EQUAL       reduce using rule 31 (expr -> expr PERCENT expr .)
+    PIPE_PIPE       reduce using rule 31 (expr -> expr PERCENT expr .)
+    AMP_AMP         reduce using rule 31 (expr -> expr PERCENT expr .)
+    RPARANT         reduce using rule 31 (expr -> expr PERCENT expr .)
+    COMMA           reduce using rule 31 (expr -> expr PERCENT expr .)
+    RBRACKET        reduce using rule 31 (expr -> expr PERCENT expr .)
+    COLON           reduce using rule 31 (expr -> expr PERCENT expr .)
+    error           reduce using rule 31 (expr -> expr PERCENT expr .)
+    LBRACKET        shift and go to state 51
+
+  ! LBRACKET        [ reduce using rule 31 (expr -> expr PERCENT expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! PLUS            [ shift and go to state 54 ]
+  ! MINUS           [ shift and go to state 55 ]
+  ! MULTIPLY        [ shift and go to state 56 ]
+  ! DIVIDE          [ shift and go to state 57 ]
+  ! PERCENT         [ shift and go to state 58 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 93
+
+    (32) expr -> expr SMALL expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 32 (expr -> expr SMALL expr .)
+    SMALL           reduce using rule 32 (expr -> expr SMALL expr .)
+    BIG             reduce using rule 32 (expr -> expr SMALL expr .)
+    EQUAL_EQUAL     reduce using rule 32 (expr -> expr SMALL expr .)
+    EXCL_EQUAL      reduce using rule 32 (expr -> expr SMALL expr .)
+    SMALL_EQUAL     reduce using rule 32 (expr -> expr SMALL expr .)
+    BIG_EQUAL       reduce using rule 32 (expr -> expr SMALL expr .)
+    PIPE_PIPE       reduce using rule 32 (expr -> expr SMALL expr .)
+    AMP_AMP         reduce using rule 32 (expr -> expr SMALL expr .)
+    RPARANT         reduce using rule 32 (expr -> expr SMALL expr .)
+    COMMA           reduce using rule 32 (expr -> expr SMALL expr .)
+    RBRACKET        reduce using rule 32 (expr -> expr SMALL expr .)
+    COLON           reduce using rule 32 (expr -> expr SMALL expr .)
+    error           reduce using rule 32 (expr -> expr SMALL expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! QUEST_MARK      [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! EQUAL           [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! PLUS            [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! MINUS           [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! MULTIPLY        [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! DIVIDE          [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! PERCENT         [ reduce using rule 32 (expr -> expr SMALL expr .) ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 94
+
+    (33) expr -> expr BIG expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 33 (expr -> expr BIG expr .)
+    SMALL           reduce using rule 33 (expr -> expr BIG expr .)
+    BIG             reduce using rule 33 (expr -> expr BIG expr .)
+    EQUAL_EQUAL     reduce using rule 33 (expr -> expr BIG expr .)
+    EXCL_EQUAL      reduce using rule 33 (expr -> expr BIG expr .)
+    SMALL_EQUAL     reduce using rule 33 (expr -> expr BIG expr .)
+    BIG_EQUAL       reduce using rule 33 (expr -> expr BIG expr .)
+    PIPE_PIPE       reduce using rule 33 (expr -> expr BIG expr .)
+    AMP_AMP         reduce using rule 33 (expr -> expr BIG expr .)
+    RPARANT         reduce using rule 33 (expr -> expr BIG expr .)
+    COMMA           reduce using rule 33 (expr -> expr BIG expr .)
+    RBRACKET        reduce using rule 33 (expr -> expr BIG expr .)
+    COLON           reduce using rule 33 (expr -> expr BIG expr .)
+    error           reduce using rule 33 (expr -> expr BIG expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! QUEST_MARK      [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! EQUAL           [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! PLUS            [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! MINUS           [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! MULTIPLY        [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! DIVIDE          [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! PERCENT         [ reduce using rule 33 (expr -> expr BIG expr .) ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 95
+
+    (34) expr -> expr EQUAL_EQUAL expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    SMALL           reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    BIG             reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    EQUAL_EQUAL     reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    EXCL_EQUAL      reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    SMALL_EQUAL     reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    BIG_EQUAL       reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    PIPE_PIPE       reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    AMP_AMP         reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    RPARANT         reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    COMMA           reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    RBRACKET        reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    COLON           reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    error           reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! QUEST_MARK      [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! EQUAL           [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! PLUS            [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! MINUS           [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! MULTIPLY        [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! DIVIDE          [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! PERCENT         [ reduce using rule 34 (expr -> expr EQUAL_EQUAL expr .) ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 96
+
+    (35) expr -> expr EXCL_EQUAL expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    SMALL           reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    BIG             reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    EQUAL_EQUAL     reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    EXCL_EQUAL      reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    SMALL_EQUAL     reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    BIG_EQUAL       reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    PIPE_PIPE       reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    AMP_AMP         reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    RPARANT         reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    COMMA           reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    RBRACKET        reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    COLON           reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    error           reduce using rule 35 (expr -> expr EXCL_EQUAL expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! QUEST_MARK      [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! EQUAL           [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! PLUS            [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! MINUS           [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! MULTIPLY        [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! DIVIDE          [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! PERCENT         [ reduce using rule 35 (expr -> expr EXCL_EQUAL expr .) ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 97
+
+    (36) expr -> expr SMALL_EQUAL expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    SMALL           reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    BIG             reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    EQUAL_EQUAL     reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    EXCL_EQUAL      reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    SMALL_EQUAL     reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    BIG_EQUAL       reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    PIPE_PIPE       reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    AMP_AMP         reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    RPARANT         reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    COMMA           reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    RBRACKET        reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    COLON           reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    error           reduce using rule 36 (expr -> expr SMALL_EQUAL expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! QUEST_MARK      [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! EQUAL           [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! PLUS            [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! MINUS           [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! MULTIPLY        [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! DIVIDE          [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! PERCENT         [ reduce using rule 36 (expr -> expr SMALL_EQUAL expr .) ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 98
+
+    (37) expr -> expr BIG_EQUAL expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    SMALL           reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    BIG             reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    EQUAL_EQUAL     reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    EXCL_EQUAL      reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    SMALL_EQUAL     reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    BIG_EQUAL       reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    PIPE_PIPE       reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    AMP_AMP         reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    RPARANT         reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    COMMA           reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    RBRACKET        reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    COLON           reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    error           reduce using rule 37 (expr -> expr BIG_EQUAL expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! QUEST_MARK      [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! EQUAL           [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! PLUS            [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! MINUS           [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! MULTIPLY        [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! DIVIDE          [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! PERCENT         [ reduce using rule 37 (expr -> expr BIG_EQUAL expr .) ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 99
+
+    (38) expr -> expr PIPE_PIPE expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    PIPE_PIPE       reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    AMP_AMP         reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    RPARANT         reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    COMMA           reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    RBRACKET        reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    COLON           reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    error           reduce using rule 38 (expr -> expr PIPE_PIPE expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+
+  ! LBRACKET        [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! QUEST_MARK      [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! EQUAL           [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! PLUS            [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! MINUS           [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! MULTIPLY        [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! DIVIDE          [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! PERCENT         [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! SMALL           [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! BIG             [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! EQUAL_EQUAL     [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! EXCL_EQUAL      [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! SMALL_EQUAL     [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! BIG_EQUAL       [ reduce using rule 38 (expr -> expr PIPE_PIPE expr .) ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 100
+
+    (39) expr -> expr AMP_AMP expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    PIPE_PIPE       reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    AMP_AMP         reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    RPARANT         reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    COMMA           reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    RBRACKET        reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    COLON           reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    error           reduce using rule 39 (expr -> expr AMP_AMP expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+
+  ! LBRACKET        [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! QUEST_MARK      [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! EQUAL           [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! PLUS            [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! MINUS           [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! MULTIPLY        [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! DIVIDE          [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! PERCENT         [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! SMALL           [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! BIG             [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! EQUAL_EQUAL     [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! EXCL_EQUAL      [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! SMALL_EQUAL     [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! BIG_EQUAL       [ reduce using rule 39 (expr -> expr AMP_AMP expr .) ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 101
+
+    (9) stmt -> IF LPARANT expr . RPARANT stmt else_choice
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    RPARANT         shift and go to state 115
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 102
+
+    (10) stmt -> IF LPARANT error . RPARANT stmt else_choice
+
+    RPARANT         shift and go to state 116
+
+
+state 103
+
+    (13) stmt -> WHILE LPARANT expr . RPARANT DO stmt
+    (15) stmt -> WHILE LPARANT expr . RPARANT error stmt
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    RPARANT         shift and go to state 117
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 104
+
+    (14) stmt -> WHILE LPARANT error . RPARANT DO stmt
+
+    RPARANT         shift and go to state 118
+
+
+state 105
+
+    (16) stmt -> FOREACH LPARANT iden . OF expr RPARANT stmt
+
+    OF              shift and go to state 119
+
+
+state 106
+
+    (17) stmt -> RETURN expr SEMICOLON .
+
+    IF              reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    WHILE           reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    FOREACH         reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    RETURN          reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    COLON           reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    EXCL_MARK       reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    MINUS           reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    PLUS            reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    LPARANT         reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    VAL             reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    ID              reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    NUMBER          reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    END             reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+    ELSE            reduce using rule 17 (stmt -> RETURN expr SEMICOLON .)
+
+
+state 107
+
+    (19) defvar -> VAL type iden .
+
+    SEMICOLON       reduce using rule 19 (defvar -> VAL type iden .)
+
+
+state 108
+
+    (20) expr -> iden LPARANT clist RPARANT .
+
+    SEMICOLON       reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    LBRACKET        reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    QUEST_MARK      reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    EQUAL           reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    PLUS            reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    MINUS           reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    MULTIPLY        reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    DIVIDE          reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    PERCENT         reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    SMALL           reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    BIG             reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    EQUAL_EQUAL     reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    EXCL_EQUAL      reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    SMALL_EQUAL     reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    BIG_EQUAL       reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    PIPE_PIPE       reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    AMP_AMP         reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    RPARANT         reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    COMMA           reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    RBRACKET        reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    COLON           reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+    error           reduce using rule 20 (expr -> iden LPARANT clist RPARANT .)
+
+
+state 109
+
+    (21) expr -> iden LPARANT error RPARANT .
+
+    SEMICOLON       reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    LBRACKET        reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    QUEST_MARK      reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    EQUAL           reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    PLUS            reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    MINUS           reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    MULTIPLY        reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    DIVIDE          reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    PERCENT         reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    SMALL           reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    BIG             reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    EQUAL_EQUAL     reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    EXCL_EQUAL      reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    SMALL_EQUAL     reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    BIG_EQUAL       reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    PIPE_PIPE       reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    AMP_AMP         reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    RPARANT         reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    COMMA           reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    RBRACKET        reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    COLON           reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+    error           reduce using rule 21 (expr -> iden LPARANT error RPARANT .)
+
+
+state 110
+
+    (52) clist -> expr COMMA . clist
+    (50) clist -> . empty
+    (51) clist -> . expr
+    (52) clist -> . expr COMMA clist
+    (58) empty -> .
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    RPARANT         reduce using rule 58 (empty -> .)
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 80
+    clist                          shift and go to state 120
+    empty                          shift and go to state 79
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 111
+
+    (22) expr -> expr LBRACKET expr RBRACKET .
+
+    SEMICOLON       reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    LBRACKET        reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    QUEST_MARK      reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    EQUAL           reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    PLUS            reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    MINUS           reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    MULTIPLY        reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    DIVIDE          reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    PERCENT         reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    SMALL           reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    BIG             reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    EQUAL_EQUAL     reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    EXCL_EQUAL      reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    SMALL_EQUAL     reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    BIG_EQUAL       reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    PIPE_PIPE       reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    AMP_AMP         reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    RPARANT         reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    COMMA           reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    RBRACKET        reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    COLON           reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+    error           reduce using rule 22 (expr -> expr LBRACKET expr RBRACKET .)
+
+
+state 112
+
+    (23) expr -> expr LBRACKET error RBRACKET .
+
+    SEMICOLON       reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    LBRACKET        reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    QUEST_MARK      reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    EQUAL           reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    PLUS            reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    MINUS           reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    MULTIPLY        reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    DIVIDE          reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    PERCENT         reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    SMALL           reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    BIG             reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    EQUAL_EQUAL     reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    EXCL_EQUAL      reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    SMALL_EQUAL     reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    BIG_EQUAL       reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    PIPE_PIPE       reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    AMP_AMP         reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    RPARANT         reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    COMMA           reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    RBRACKET        reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    COLON           reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+    error           reduce using rule 23 (expr -> expr LBRACKET error RBRACKET .)
+
+
+state 113
+
+    (24) expr -> expr QUEST_MARK expr COLON . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 121
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 114
+
+    (25) expr -> expr QUEST_MARK expr error . expr
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 122
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 115
+
+    (9) stmt -> IF LPARANT expr RPARANT . stmt else_choice
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 31
+    stmt                           shift and go to state 123
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 116
+
+    (10) stmt -> IF LPARANT error RPARANT . stmt else_choice
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    stmt                           shift and go to state 124
+    expr                           shift and go to state 31
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 117
+
+    (13) stmt -> WHILE LPARANT expr RPARANT . DO stmt
+    (15) stmt -> WHILE LPARANT expr RPARANT . error stmt
+
+    DO              shift and go to state 125
+    error           shift and go to state 126
+
+
+state 118
+
+    (14) stmt -> WHILE LPARANT error RPARANT . DO stmt
+
+    DO              shift and go to state 127
+
+
+state 119
+
+    (16) stmt -> FOREACH LPARANT iden OF . expr RPARANT stmt
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    iden                           shift and go to state 26
+    expr                           shift and go to state 128
+    num                            shift and go to state 40
+
+state 120
+
+    (52) clist -> expr COMMA clist .
+
+    RPARANT         reduce using rule 52 (clist -> expr COMMA clist .)
+
+
+state 121
+
+    (24) expr -> expr QUEST_MARK expr COLON expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    QUEST_MARK      reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    EQUAL           reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    SMALL           reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    BIG             reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    EQUAL_EQUAL     reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    EXCL_EQUAL      reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    SMALL_EQUAL     reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    BIG_EQUAL       reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    PIPE_PIPE       reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    AMP_AMP         reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    RPARANT         reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    COMMA           reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    RBRACKET        reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    COLON           reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    error           reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .)
+    LBRACKET        shift and go to state 51
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+
+  ! LBRACKET        [ reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .) ]
+  ! PLUS            [ reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .) ]
+  ! MINUS           [ reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .) ]
+  ! MULTIPLY        [ reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .) ]
+  ! DIVIDE          [ reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .) ]
+  ! PERCENT         [ reduce using rule 24 (expr -> expr QUEST_MARK expr COLON expr .) ]
+  ! QUEST_MARK      [ shift and go to state 52 ]
+  ! EQUAL           [ shift and go to state 53 ]
+  ! SMALL           [ shift and go to state 59 ]
+  ! BIG             [ shift and go to state 60 ]
+  ! EQUAL_EQUAL     [ shift and go to state 61 ]
+  ! EXCL_EQUAL      [ shift and go to state 62 ]
+  ! SMALL_EQUAL     [ shift and go to state 63 ]
+  ! BIG_EQUAL       [ shift and go to state 64 ]
+  ! PIPE_PIPE       [ shift and go to state 65 ]
+  ! AMP_AMP         [ shift and go to state 66 ]
+
+
+state 122
+
+    (25) expr -> expr QUEST_MARK expr error expr .
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    SEMICOLON       reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .)
+    RPARANT         reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .)
+    COMMA           reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .)
+    RBRACKET        reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .)
+    COLON           reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .)
+    error           reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .)
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+  ! LBRACKET        [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! QUEST_MARK      [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! EQUAL           [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! PLUS            [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! MINUS           [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! MULTIPLY        [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! DIVIDE          [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! PERCENT         [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! SMALL           [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! BIG             [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! EQUAL_EQUAL     [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! EXCL_EQUAL      [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! SMALL_EQUAL     [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! BIG_EQUAL       [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! PIPE_PIPE       [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+  ! AMP_AMP         [ reduce using rule 25 (expr -> expr QUEST_MARK expr error expr .) ]
+
+
+state 123
+
+    (9) stmt -> IF LPARANT expr RPARANT stmt . else_choice
+    (11) else_choice -> . empty
+    (12) else_choice -> . ELSE stmt
+    (58) empty -> .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 131
+    IF              reduce using rule 58 (empty -> .)
+    WHILE           reduce using rule 58 (empty -> .)
+    FOREACH         reduce using rule 58 (empty -> .)
+    RETURN          reduce using rule 58 (empty -> .)
+    COLON           reduce using rule 58 (empty -> .)
+    EXCL_MARK       reduce using rule 58 (empty -> .)
+    MINUS           reduce using rule 58 (empty -> .)
+    PLUS            reduce using rule 58 (empty -> .)
+    LPARANT         reduce using rule 58 (empty -> .)
+    VAL             reduce using rule 58 (empty -> .)
+    ID              reduce using rule 58 (empty -> .)
+    NUMBER          reduce using rule 58 (empty -> .)
+    END             reduce using rule 58 (empty -> .)
+
+  ! ELSE            [ reduce using rule 58 (empty -> .) ]
+
+    else_choice                    shift and go to state 129
+    empty                          shift and go to state 130
+
+state 124
+
+    (10) stmt -> IF LPARANT error RPARANT stmt . else_choice
+    (11) else_choice -> . empty
+    (12) else_choice -> . ELSE stmt
+    (58) empty -> .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 131
+    IF              reduce using rule 58 (empty -> .)
+    WHILE           reduce using rule 58 (empty -> .)
+    FOREACH         reduce using rule 58 (empty -> .)
+    RETURN          reduce using rule 58 (empty -> .)
+    COLON           reduce using rule 58 (empty -> .)
+    EXCL_MARK       reduce using rule 58 (empty -> .)
+    MINUS           reduce using rule 58 (empty -> .)
+    PLUS            reduce using rule 58 (empty -> .)
+    LPARANT         reduce using rule 58 (empty -> .)
+    VAL             reduce using rule 58 (empty -> .)
+    ID              reduce using rule 58 (empty -> .)
+    NUMBER          reduce using rule 58 (empty -> .)
+    END             reduce using rule 58 (empty -> .)
+
+  ! ELSE            [ reduce using rule 58 (empty -> .) ]
+
+    else_choice                    shift and go to state 132
+    empty                          shift and go to state 130
+
+state 125
+
+    (13) stmt -> WHILE LPARANT expr RPARANT DO . stmt
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 31
+    stmt                           shift and go to state 133
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 126
+
+    (15) stmt -> WHILE LPARANT expr RPARANT error . stmt
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    expr                           shift and go to state 31
+    stmt                           shift and go to state 134
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 127
+
+    (14) stmt -> WHILE LPARANT error RPARANT DO . stmt
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    stmt                           shift and go to state 135
+    expr                           shift and go to state 31
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 128
+
+    (16) stmt -> FOREACH LPARANT iden OF expr . RPARANT stmt
+    (22) expr -> expr . LBRACKET expr RBRACKET
+    (23) expr -> expr . LBRACKET error RBRACKET
+    (24) expr -> expr . QUEST_MARK expr COLON expr
+    (25) expr -> expr . QUEST_MARK expr error expr
+    (26) expr -> expr . EQUAL expr
+    (27) expr -> expr . PLUS expr
+    (28) expr -> expr . MINUS expr
+    (29) expr -> expr . MULTIPLY expr
+    (30) expr -> expr . DIVIDE expr
+    (31) expr -> expr . PERCENT expr
+    (32) expr -> expr . SMALL expr
+    (33) expr -> expr . BIG expr
+    (34) expr -> expr . EQUAL_EQUAL expr
+    (35) expr -> expr . EXCL_EQUAL expr
+    (36) expr -> expr . SMALL_EQUAL expr
+    (37) expr -> expr . BIG_EQUAL expr
+    (38) expr -> expr . PIPE_PIPE expr
+    (39) expr -> expr . AMP_AMP expr
+
+    RPARANT         shift and go to state 136
+    LBRACKET        shift and go to state 51
+    QUEST_MARK      shift and go to state 52
+    EQUAL           shift and go to state 53
+    PLUS            shift and go to state 54
+    MINUS           shift and go to state 55
+    MULTIPLY        shift and go to state 56
+    DIVIDE          shift and go to state 57
+    PERCENT         shift and go to state 58
+    SMALL           shift and go to state 59
+    BIG             shift and go to state 60
+    EQUAL_EQUAL     shift and go to state 61
+    EXCL_EQUAL      shift and go to state 62
+    SMALL_EQUAL     shift and go to state 63
+    BIG_EQUAL       shift and go to state 64
+    PIPE_PIPE       shift and go to state 65
+    AMP_AMP         shift and go to state 66
+
+
+state 129
+
+    (9) stmt -> IF LPARANT expr RPARANT stmt else_choice .
+
+    IF              reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    WHILE           reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    FOREACH         reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    RETURN          reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    COLON           reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    EXCL_MARK       reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    MINUS           reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    PLUS            reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    LPARANT         reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    VAL             reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    ID              reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    NUMBER          reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    END             reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+    ELSE            reduce using rule 9 (stmt -> IF LPARANT expr RPARANT stmt else_choice .)
+
+
+state 130
+
+    (11) else_choice -> empty .
+
+    ELSE            reduce using rule 11 (else_choice -> empty .)
+    IF              reduce using rule 11 (else_choice -> empty .)
+    WHILE           reduce using rule 11 (else_choice -> empty .)
+    FOREACH         reduce using rule 11 (else_choice -> empty .)
+    RETURN          reduce using rule 11 (else_choice -> empty .)
+    COLON           reduce using rule 11 (else_choice -> empty .)
+    EXCL_MARK       reduce using rule 11 (else_choice -> empty .)
+    MINUS           reduce using rule 11 (else_choice -> empty .)
+    PLUS            reduce using rule 11 (else_choice -> empty .)
+    LPARANT         reduce using rule 11 (else_choice -> empty .)
+    VAL             reduce using rule 11 (else_choice -> empty .)
+    ID              reduce using rule 11 (else_choice -> empty .)
+    NUMBER          reduce using rule 11 (else_choice -> empty .)
+    END             reduce using rule 11 (else_choice -> empty .)
+
+
+state 131
+
+    (12) else_choice -> ELSE . stmt
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    stmt                           shift and go to state 137
+    expr                           shift and go to state 31
+    defvar                         shift and go to state 32
+    iden                           shift and go to state 26
+    num                            shift and go to state 40
+
+state 132
+
+    (10) stmt -> IF LPARANT error RPARANT stmt else_choice .
+
+    IF              reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    WHILE           reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    FOREACH         reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    RETURN          reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    COLON           reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    EXCL_MARK       reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    MINUS           reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    PLUS            reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    LPARANT         reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    VAL             reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    ID              reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    NUMBER          reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    END             reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+    ELSE            reduce using rule 10 (stmt -> IF LPARANT error RPARANT stmt else_choice .)
+
+
+state 133
+
+    (13) stmt -> WHILE LPARANT expr RPARANT DO stmt .
+
+    IF              reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    WHILE           reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    FOREACH         reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    RETURN          reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    COLON           reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    EXCL_MARK       reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    MINUS           reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    PLUS            reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    LPARANT         reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    VAL             reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    ID              reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    NUMBER          reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    END             reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+    ELSE            reduce using rule 13 (stmt -> WHILE LPARANT expr RPARANT DO stmt .)
+
+
+state 134
+
+    (15) stmt -> WHILE LPARANT expr RPARANT error stmt .
+
+    IF              reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    WHILE           reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    FOREACH         reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    RETURN          reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    COLON           reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    EXCL_MARK       reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    MINUS           reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    PLUS            reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    LPARANT         reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    VAL             reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    ID              reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    NUMBER          reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    END             reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+    ELSE            reduce using rule 15 (stmt -> WHILE LPARANT expr RPARANT error stmt .)
+
+
+state 135
+
+    (14) stmt -> WHILE LPARANT error RPARANT DO stmt .
+
+    IF              reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    WHILE           reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    FOREACH         reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    RETURN          reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    COLON           reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    EXCL_MARK       reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    MINUS           reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    PLUS            reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    LPARANT         reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    VAL             reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    ID              reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    NUMBER          reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    END             reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+    ELSE            reduce using rule 14 (stmt -> WHILE LPARANT error RPARANT DO stmt .)
+
+
+state 136
+
+    (16) stmt -> FOREACH LPARANT iden OF expr RPARANT . stmt
+    (7) stmt -> . expr SEMICOLON
+    (8) stmt -> . defvar SEMICOLON
+    (9) stmt -> . IF LPARANT expr RPARANT stmt else_choice
+    (10) stmt -> . IF LPARANT error RPARANT stmt else_choice
+    (13) stmt -> . WHILE LPARANT expr RPARANT DO stmt
+    (14) stmt -> . WHILE LPARANT error RPARANT DO stmt
+    (15) stmt -> . WHILE LPARANT expr RPARANT error stmt
+    (16) stmt -> . FOREACH LPARANT iden OF expr RPARANT stmt
+    (17) stmt -> . RETURN expr SEMICOLON
+    (18) stmt -> . COLON body END
+    (20) expr -> . iden LPARANT clist RPARANT
+    (21) expr -> . iden LPARANT error RPARANT
+    (22) expr -> . expr LBRACKET expr RBRACKET
+    (23) expr -> . expr LBRACKET error RBRACKET
+    (24) expr -> . expr QUEST_MARK expr COLON expr
+    (25) expr -> . expr QUEST_MARK expr error expr
+    (26) expr -> . expr EQUAL expr
+    (27) expr -> . expr PLUS expr
+    (28) expr -> . expr MINUS expr
+    (29) expr -> . expr MULTIPLY expr
+    (30) expr -> . expr DIVIDE expr
+    (31) expr -> . expr PERCENT expr
+    (32) expr -> . expr SMALL expr
+    (33) expr -> . expr BIG expr
+    (34) expr -> . expr EQUAL_EQUAL expr
+    (35) expr -> . expr EXCL_EQUAL expr
+    (36) expr -> . expr SMALL_EQUAL expr
+    (37) expr -> . expr BIG_EQUAL expr
+    (38) expr -> . expr PIPE_PIPE expr
+    (39) expr -> . expr AMP_AMP expr
+    (40) expr -> . EXCL_MARK expr
+    (41) expr -> . MINUS expr
+    (42) expr -> . PLUS expr
+    (43) expr -> . LPARANT expr RPARANT
+    (44) expr -> . LPARANT error RPARANT
+    (45) expr -> . iden
+    (46) expr -> . num
+    (19) defvar -> . VAL type iden
+    (57) iden -> . ID
+    (56) num -> . NUMBER
+
+    IF              shift and go to state 33
+    WHILE           shift and go to state 34
+    FOREACH         shift and go to state 35
+    RETURN          shift and go to state 36
+    COLON           shift and go to state 28
+    EXCL_MARK       shift and go to state 39
+    MINUS           shift and go to state 38
+    PLUS            shift and go to state 37
+    LPARANT         shift and go to state 27
+    VAL             shift and go to state 41
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 42
+
+    iden                           shift and go to state 26
+    expr                           shift and go to state 31
+    stmt                           shift and go to state 138
+    defvar                         shift and go to state 32
+    num                            shift and go to state 40
+
+state 137
+
+    (12) else_choice -> ELSE stmt .
+
+    ELSE            reduce using rule 12 (else_choice -> ELSE stmt .)
+    IF              reduce using rule 12 (else_choice -> ELSE stmt .)
+    WHILE           reduce using rule 12 (else_choice -> ELSE stmt .)
+    FOREACH         reduce using rule 12 (else_choice -> ELSE stmt .)
+    RETURN          reduce using rule 12 (else_choice -> ELSE stmt .)
+    COLON           reduce using rule 12 (else_choice -> ELSE stmt .)
+    EXCL_MARK       reduce using rule 12 (else_choice -> ELSE stmt .)
+    MINUS           reduce using rule 12 (else_choice -> ELSE stmt .)
+    PLUS            reduce using rule 12 (else_choice -> ELSE stmt .)
+    LPARANT         reduce using rule 12 (else_choice -> ELSE stmt .)
+    VAL             reduce using rule 12 (else_choice -> ELSE stmt .)
+    ID              reduce using rule 12 (else_choice -> ELSE stmt .)
+    NUMBER          reduce using rule 12 (else_choice -> ELSE stmt .)
+    END             reduce using rule 12 (else_choice -> ELSE stmt .)
+
+
+state 138
+
+    (16) stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .
+
+    IF              reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    WHILE           reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    FOREACH         reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    RETURN          reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    COLON           reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    EXCL_MARK       reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    MINUS           reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    PLUS            reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    LPARANT         reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    VAL             reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    ID              reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    NUMBER          reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    END             reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+    ELSE            reduce using rule 16 (stmt -> FOREACH LPARANT iden OF expr RPARANT stmt .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ELSE in state 123 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 124 resolved as shift

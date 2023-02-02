@@ -1,0 +1,34 @@
+function main() returns Int:
+    val Int a;
+    a = 10;
+    val Array n;
+    n = createArray(5);
+    n[4 ! 5 >] = 5;
+    
+    g(a hi);
+    while(1 < 0) printInt(1);
+    -----------syntax error correction
+
+    if (a  h>):
+        printInt(1);
+    end
+    if (a  == 10):
+        printInt(1);
+    end
+
+    (2 > 4)? printInt(1): printInt(0);
+    while( a > 0 ):
+        printInt(a);
+        a = a - 1;
+    end
+    while( a > 0 jo ) do:
+        printInt(a);
+        a = a - 1;
+    end
+
+    return 0;
+end
+function g(Int i) returns Int:
+
+    return 0;
+end
